@@ -7,8 +7,8 @@ import JSONCache from 'redis-json';
 @Injectable()
 export class TasksService {
 
-	// @Cron(CronExpression.EVERY_HOUR)
-    @Cron(CronExpression.EVERY_10_SECONDS)
+	@Cron(CronExpression.EVERY_HOUR)
+    // @Cron(CronExpression.EVERY_10_SECONDS)
 	async getBinanceInformation() {
         try{
             const res = await axios.get('https://api.binance.com/api/v3/ticker/24hr');
