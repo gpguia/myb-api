@@ -1,0 +1,12 @@
+FROM node:14.15.5-alpine3.13 AS base
+
+# set work directory
+WORKDIR /
+# Install nest to manage monorepo deps
+RUN yarn global add @nestjs/cli --loglevel notice
+# Copy required config files
+COPY *.json yarn.lock /tmp/
+# Install packages dependencies [use --pure-lockfile to be able to use docker cache layer]
+RUN cd /tmp && yarn install --frozen-lockfile
+
+RUN echo "Dependencies built"

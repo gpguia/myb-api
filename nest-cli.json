@@ -1,0 +1,30 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/myb/src",
+  "monorepo": true,
+  "root": "apps/myb",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/myb/tsconfig.app.json"
+  },
+  "projects": {
+    "myb": {
+      "type": "application",
+      "root": "apps/myb",
+      "entryFile": "main",
+      "sourceRoot": "apps/myb/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/myb/tsconfig.app.json"
+      }
+    },
+    "update": {
+      "type": "application",
+      "root": "apps/update",
+      "entryFile": "main",
+      "sourceRoot": "apps/update/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/update/tsconfig.app.json"
+      }
+    }
+  }
+}

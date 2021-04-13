@@ -1,0 +1,51 @@
+version: '3.9'
+
+services: 
+    myb:
+        env_file: .env
+        container_name: myb
+        build: 
+            context: .
+            dockerfile: devops/dockerfiles/Dockerfile.app
+            args:
+                SERVICE: myb
+        depends_on: 
+            - redis
+        networks: 
+            - myb
+        ports:
+            - '3000:3000'
+        restart: always
+    update:
+        env_file: .env
+        container_name: update
+        build: 
+            context: .
+            dockerfile: devops/dockerfiles/Dockerfile.app
+            args:
+                SERVICE: update
+        depends_on: 
+            - redis
+        networks: 
+            - myb
+        ports:
+            - '3001:3000'
+        restart: always
+    redis:
+        env_file: .env
+        image: bitnami/redis:6.0.12
+        networks: 
+            - myb
+        environment: 
+            - REDIS_PASSWORD=${REDIS_PASSWORD}
+        ports:
+            - '6379:6379'
+        restart: always
+
+networks:
+    myb:
+        name: myb-network
+
+volumes:
+    redis_data:
+        driver: local
